@@ -55,7 +55,7 @@ EOF
     efiInstallAsRemovable = true;
     device = "nodev";
   };
-  fileSystems."/boot" = { device = "$esp"; fsType = "vfat"; };
+  fileSystems."/boot/EFI" = { device = "$esp"; fsType = "vfat"; };
 EOF
 )
   else
@@ -367,9 +367,9 @@ infect() {
 
   mv -v /boot /boot.bak || { cp -a /boot /boot.bak ; rm -rf /boot/* ; umount /boot ; }
   if isEFI; then
-    mkdir -p /boot
-    mount "$esp" /boot
-    find /boot -depth ! -path /boot -exec rm -rf {} +
+    mkdir -p /boot/EFI
+    mount "$esp" /boot/EFI
+    find /boot/EFI -depth ! -path /boot -exec rm -rf {} +
   fi
   /nix/var/nix/profiles/system/bin/switch-to-configuration boot
 }
