@@ -369,7 +369,7 @@ infect() {
   if isEFI; then
     mkdir -p /boot/EFI
     mount "$esp" /boot/EFI
-    find /boot/EFI -depth ! -path /boot -exec rm -rf {} +
+    find /boot/EFI -depth ! -path /boot/EFI -exec rm -rf {} +
   fi
   /nix/var/nix/profiles/system/bin/switch-to-configuration boot
 }
